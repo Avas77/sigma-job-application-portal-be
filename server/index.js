@@ -1,5 +1,5 @@
 import express from "express";
-import sequelize from "./mysql/connect.js";
+import sequelize from "./database/connect.js";
 
 const app = express();
 const PORT = 3000;
@@ -11,10 +11,14 @@ app.get("/", (req, res) => {
 const startServer = async () => {
   try {
     await sequelize.authenticate();
+    const res = await sequelize.sync({ force: true });
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
     });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 startServer();
+``;
