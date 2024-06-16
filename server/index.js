@@ -1,12 +1,13 @@
 import express from "express";
 import sequelize from "./database/connect.js";
+import dotenv from "dotenv";
+import cors from "cors";
 
 const app = express();
 const PORT = 3000;
 
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
+dotenv.config();
+app.use(cors());
 
 const startServer = async () => {
   try {
