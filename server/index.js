@@ -1,12 +1,16 @@
 import express from "express";
 import sequelize from "./database/connect.js";
+import dotenv from "dotenv";
+import cors from "cors";
+import candidateRouter from "./routes/candidate.routes.js";
 
 const app = express();
 const PORT = 3000;
 
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
+dotenv.config();
+app.use(cors());
+app.use(express.json());
+app.use("/api/v1/candidates", candidateRouter);
 
 const startServer = async () => {
   try {
@@ -21,4 +25,3 @@ const startServer = async () => {
 };
 
 startServer();
-``;
