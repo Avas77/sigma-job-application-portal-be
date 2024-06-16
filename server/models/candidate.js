@@ -23,7 +23,7 @@ const candidateModel = sequelize.define("Candidate", {
     type: DataTypes.TIME,
     allowNull: true,
   },
-  linkedIn: {
+  linkedin: {
     type: DataTypes.STRING,
     allowNull: true,
   },
