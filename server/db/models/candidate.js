@@ -1,5 +1,5 @@
-import { DataTypes, Sequelize } from "sequelize";
-import sequelize from "../database/connect.js";
+import { DataTypes } from "sequelize";
+import sequelize from "../connect.js";
 
 const candidateModel = sequelize.define("Candidate", {
   firstName: {
