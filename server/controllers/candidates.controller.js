@@ -1,4 +1,4 @@
-import candidateModel from "../models/candidate.js";
+import candidateModel from "../db/models/candidate.js";
 
 export const createCandidate = async (req, res) => {
   const {
@@ -24,6 +24,6 @@ export const createCandidate = async (req, res) => {
     });
     res.status(201).send(candidate);
   } catch (error) {
-    res.error(400).send(error);
+    res.status(400).send(error);
   }
 };
