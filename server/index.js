@@ -14,7 +14,7 @@ app.use("/api/v1/candidates", candidateRouter);
 const startServer = async () => {
   try {
     await sequelize.authenticate();
-    const res = await sequelize.sync({ force: true });
+    await sequelize.sync();
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
     });

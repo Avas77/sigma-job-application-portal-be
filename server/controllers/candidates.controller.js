@@ -24,6 +24,6 @@ export const createCandidate = async (req, res) => {
     });
     res.status(201).send(candidate);
   } catch (error) {
-    res.error(400).send(error);
+    res.status(400).send(error);
   }
 };

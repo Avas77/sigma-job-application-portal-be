@@ -1,6 +1,8 @@
 import { Sequelize } from "sequelize";
-console.log("Env", process.env.API_URL);
-const sequelize = new Sequelize("job_application_portal", "root", "buddy123", {
+import "dotenv/config";
+import { ENV } from "../const/env.js";
+
+const sequelize = new Sequelize(ENV.DATABASE_NAME, ENV.USERNAME, ENV.PASSWORD, {
   dialect: "mysql",
   host: "localhost",
 });
