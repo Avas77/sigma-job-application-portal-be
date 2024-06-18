@@ -1,5 +1,12 @@
+import "@mantine/core/styles.css";
+import { MantineProvider, Text } from "@mantine/core";
+
 function App() {
-  return <div>Hello World</div>;
+  return (
+    <MantineProvider>
+      <Text fz={"h1"}>Hello World</Text>
+    </MantineProvider>
+  );
 }
 
 export default App;
