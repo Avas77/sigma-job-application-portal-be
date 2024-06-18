@@ -39,8 +39,8 @@ const ApplicationForm = () => {
             required
             {...form.getInputProps("lastName")}
           />
-          <NumberInput
-            hideControls
+          <TextInput
+            type="tel"
             label="Phone Number"
             {...form.getInputProps("phoneNumber")}
           />
