@@ -12,10 +12,13 @@
   "dependencies": {
     "@mantine/core": "^7.10.2",
     "@mantine/dates": "^7.10.2",
+    "@mantine/form": "^7.10.2",
     "@mantine/hooks": "^7.10.2",
     "dayjs": "^1.11.11",
+    "mantine-form-zod-resolver": "^1.1.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
