@@ -1,6 +1,7 @@
 import "@mantine/core/styles.css";
 import { Box, Input, MantineProvider, createTheme } from "@mantine/core";
 import Application from "./components/Application";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const theme = createTheme({
   components: {
@@ -14,13 +15,17 @@ const theme = createTheme({
   },
 });
 
+const queryClient = new QueryClient();
+
 function App() {
   return (
-    <MantineProvider theme={theme}>
-      <Box w={"100vw"} bg={"#F4F7F9"} py="3rem">
-        <Application />
-      </Box>
-    </MantineProvider>
+    <QueryClientProvider client={queryClient}>
+      <MantineProvider theme={theme}>
+        <Box w={"100vw"} bg={"#F4F7F9"} py="3rem">
+          <Application />
+        </Box>
+      </MantineProvider>
+    </QueryClientProvider>
   );
 }
 
