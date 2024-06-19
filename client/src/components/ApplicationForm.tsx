@@ -3,7 +3,11 @@ import { TimeInput } from "@mantine/dates";
 import { useForm, zodResolver } from "@mantine/form";
 import { schema } from "../schema/ApplicationFormSchema";
 import { ApplicationInputTypes } from "../types/ApplicationInputTypes";
-import { checkEmailExists, saveCandidateInfo } from "../api";
+import {
+  checkEmailExists,
+  saveCandidateInfo,
+  updateCandidateInfo,
+} from "../api";
 import { useMutation } from "react-query";
 import NotificationBanner from "./NotificationBanner";
 import { useState } from "react";
@@ -19,16 +23,28 @@ const ApplicationForm = () => {
   });
   const { mutate: saveCandidate } = useMutation(saveCandidateInfo);
   const { mutate: emailMutate } = useMutation(checkEmailExists);
+  const { mutate: updateCandidate } = useMutation(updateCandidateInfo);
 
   const handleFormValues = (values: ApplicationInputTypes) => {
-    saveCandidate(values, {
-      onSuccess: () => {
-        setShowSuccesBanner(true);
-      },
-      onError: () => {
-        setShowErrorBanner(true);
-      },
-    });
+    if (showAlert) {
+      updateCandidate(values, {
+        onSuccess: () => {
+          setShowSuccesBanner(true);
+        },
+        onError: () => {
+          setShowErrorBanner(true);
+        },
+      });
+    } else {
+      saveCandidate(values, {
+        onSuccess: () => {
+          setShowSuccesBanner(true);
+        },
+        onError: () => {
+          setShowErrorBanner(true);
+        },
+      });
+    }
   };
 
   const handleEmailInputChange = (

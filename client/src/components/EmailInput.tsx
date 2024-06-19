@@ -13,13 +13,18 @@ const EmailInput = ({
   handleEmailInputChange,
   showAlert,
 }: IEmailInputProps) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    form.getInputProps("email").onChange(event);
+    handleEmailInputChange(event);
+  };
+
   return (
     <Box>
       <TextInput
         label="Email"
         required
         {...form.getInputProps("email")}
-        onChange={handleEmailInputChange}
+        onChange={handleChange}
       />
       {showAlert ? (
         <Alert
