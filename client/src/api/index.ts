@@ -22,3 +22,12 @@ export const checkEmailExists = async (payload: { email: string }) => {
     console.log(error);
   }
 };
+
+export const updateCandidateInfo = async (payload: ApplicationInputTypes) => {
+  try {
+    const response = httpRequest.put("candidates/update", payload);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
