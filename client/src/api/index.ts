@@ -13,3 +13,12 @@ export const saveCandidateInfo = async (payload: ApplicationInputTypes) => {
     console.log(error);
   }
 };
+
+export const checkEmailExists = async (payload: { email: string }) => {
+  try {
+    const response = httpRequest.post("candidates/check-email", payload);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
