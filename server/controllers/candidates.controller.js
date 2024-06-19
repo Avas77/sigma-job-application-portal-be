@@ -21,7 +21,7 @@ export const checkEmail = async (req, res) => {
     if (emailExists) {
       res.status(200).send(emailExists);
     } else {
-      res.status(200).send([]);
+      res.status(200).send({});
     }
   } catch (error) {
     res.status(400).send(error);
