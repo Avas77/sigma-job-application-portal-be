@@ -3,22 +3,25 @@ import { TimeInput } from "@mantine/dates";
 import { useForm, zodResolver } from "@mantine/form";
 import { schema } from "../schema/ApplicationFormSchema";
 import { ApplicationInputTypes } from "../types/ApplicationInputTypes";
-import { saveCandidateInfo } from "../api";
+import { checkEmailExists, saveCandidateInfo } from "../api";
 import { useMutation } from "react-query";
 import NotificationBanner from "./NotificationBanner";
 import { useState } from "react";
+import EmailInput from "./EmailInput";
 
 const ApplicationForm = () => {
   const [showSuccesBanner, setShowSuccesBanner] = useState(false);
   const [showErrorBanner, setShowErrorBanner] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
   const form = useForm<ApplicationInputTypes>({
     mode: "uncontrolled",
     validate: zodResolver(schema),
   });
-  const { mutate } = useMutation(saveCandidateInfo);
+  const { mutate: saveCandidate } = useMutation(saveCandidateInfo);
+  const { mutate: emailMutate } = useMutation(checkEmailExists);
 
   const handleFormValues = (values: ApplicationInputTypes) => {
-    mutate(values, {
+    saveCandidate(values, {
       onSuccess: () => {
         setShowSuccesBanner(true);
       },
@@ -26,6 +29,26 @@ const ApplicationForm = () => {
         setShowErrorBanner(true);
       },
     });
+  };
+
+  const handleEmailInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const email = event.target.value;
+    emailMutate(
+      {
+        email,
+      },
+      {
+        onSuccess: (response) => {
+          if (Object.keys(response?.data)?.length > 0) {
+            setShowAlert(true);
+          } else {
+            setShowAlert(false);
+          }
+        },
+      }
+    );
   };
 
   return (
@@ -68,7 +91,11 @@ const ApplicationForm = () => {
             label="Phone Number"
             {...form.getInputProps("phoneNumber")}
           />
-          <TextInput label="Email" required {...form.getInputProps("email")} />
+          <EmailInput
+            form={form}
+            handleEmailInputChange={handleEmailInputChange}
+            showAlert={showAlert}
+          />
           <TimeInput
             label="Time interval when it’s better to call (in case a call is needed)"
             {...form.getInputProps("timeInterval")}
